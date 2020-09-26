@@ -22,7 +22,7 @@ class Client:
         print(fileInfo)
 
         #发送文件信息
-        self.socket.send(fileInfo.encode)
+        self.socket.send(fileInfo.encode())
         tempBuffer=self.socket.recv(BUFFER_SIZE)
         print(tempBuffer)
         if int(tempBuffer)!=FLAG_HEAD_RECV:
@@ -47,5 +47,5 @@ class Client:
     pass
 
 c=Client()
-c.sendFile("."+os.path.sep+"uploadFile.py")
+c.sendFile("."+os.path.sep+"test.bmp")
 #c.sendString("Hello,World!")

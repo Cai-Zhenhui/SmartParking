@@ -17,6 +17,7 @@ class Server:
         self.linkTime=int(time.time())
         pass
     def __del__(self):
+        self.clientSocket.close()
         self.socket.close()
         pass
     def run(self):
