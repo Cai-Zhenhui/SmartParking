@@ -59,5 +59,5 @@ class Client:
     pass
 
 c=Client()
-c.sendFile("."+os.path.sep+"test.bmp")
+c.sendFile(input("input fileName:"))
 #c.sendString("Hello,World!")
