@@ -57,7 +57,7 @@ class Client:
         print(data)
         pass
     pass
-
-c=Client()
-c.sendFile(input("input fileName:"))
-#c.sendString("Hello,World!")
+if if __name__ == "__main__":
+    c=Client()
+    c.sendFile(input("input fileName:"))
+    pass

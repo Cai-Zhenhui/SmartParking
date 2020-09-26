@@ -3,6 +3,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import time
 import cv2
+from uploadFile import *
 camera=PiCamera()
 camera.resolution=(640,480)
 camera.framerate=60
@@ -18,6 +19,9 @@ for frame in camera.capture_continuous(rawCapture,format="bgr",use_video_port=Tr
     if key==ord('q'):
         break
     elif key==ord('s'):
-        img.imwrite(str(time.time())+".jpg",img)
+        fileName=str(time.time())+".jpg"
+        img.imwrite(fileName,img)
+        c=Client()
+        c.sendFile(fileName)
         pass
     pass
