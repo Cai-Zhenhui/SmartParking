@@ -29,7 +29,7 @@ class Server:
                     break
                 continue
             
-            infoList=str(fileInfo).split("|")
+            infoList=fileInfo.decode().split("|")
             print(infoList)
             fileName=""
             fileSize=0

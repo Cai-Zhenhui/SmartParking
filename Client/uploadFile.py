@@ -27,11 +27,11 @@ class Client:
         tempBuffer=self.socket.recv(BUFFER_SIZE)
         tempTime=int(time.time())
         while not tempBuffer:
-            if int(time.time)-tempTime>30:
+            if int(time.time())-tempTime>30:
                 print("timeout!")
                 return
             tempBuffer=self.socket.recv(BUFFER_SIZE)
-        tempBuffer=str(tempBuffer)
+        tempBuffer=tempBuffer.decode()
         if int(tempBuffer)!=FLAG_HEAD_RECV:
             print("ERROR")
             pass
