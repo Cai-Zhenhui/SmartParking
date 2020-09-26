@@ -22,7 +22,8 @@ class Server:
         pass
     def run(self):
         while(True):
-            fileInfo=self.clientSocket.recv(BUFFER_SIZE)
+            sizeInfo=int(self.clientSocket.recv(3).decode())
+            fileInfo=self.clientSocket.recv(sizeInfo)
             if not fileInfo:
                 if int(time.time())-self.linkTime>30:
                     print("timeout!")
@@ -31,7 +32,7 @@ class Server:
             print(fileInfo)
             infoList=fileInfo.decode().split("|")
             print(infoList)
-            print("!!!!!!!!!!!1")
+            print("!!!!!!!!!!!")
             fileName=""
             fileSize=0
             if len(infoList)==3:

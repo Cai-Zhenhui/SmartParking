@@ -19,8 +19,13 @@ class Client:
         path=os.path.join(self.currentDir,filePath)
         fileName=os.path.basename(path)
         fileSize=os.stat(path).st_size
+        #构造文件信息
+        #post|name|字节大小
         fileInfo="post|%s|%s"%(fileName,fileSize)
         print(fileInfo)
+        
+        #发送文件头长度 该部分不超过3字节
+        self.socket.send(("%03d"%(len(fileInfo))).encode())
 
         #发送文件信息
         self.socket.send(fileInfo.encode())
