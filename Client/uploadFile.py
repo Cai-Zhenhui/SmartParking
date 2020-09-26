@@ -23,7 +23,7 @@ class Client:
         data=input(">:")
         self.socket.send(data.encode())
         data=self.socket.recv(BUFFER_SIZE)
-        print(data.encode())
+        print(data)
         pass
     pass
 
