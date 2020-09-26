@@ -38,7 +38,7 @@ class Client:
         #发送文件实体
         with open(path,"rb") as target:
             data=target.read(BUFFER_SIZE)
-            self.socket.send(data)
+            self.socket.sendall(data)
             while(not data):
                 data=target.read(BUFFER_SIZE)
                 self.socket.send(data)
