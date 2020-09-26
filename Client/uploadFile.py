@@ -22,7 +22,7 @@ class Client:
         print(fileInfo)
 
         #发送文件信息
-        self.socket.send(fileInfo)
+        self.socket.send(fileInfo.encode)
         tempBuffer=self.socket.recv(BUFFER_SIZE)
         print(tempBuffer)
         if int(tempBuffer)!=FLAG_HEAD_RECV:

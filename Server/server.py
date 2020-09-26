@@ -14,6 +14,7 @@ class Server:
         print("Server is running! Waiting for client!")
         self.clientSocket,self.clientAddr=self.socket.accept()
         print("Connect Addr:",self.clientAddr)
+        self.linkTime=int(time.time())
         pass
     def __del__(self):
         self.socket.close()
@@ -22,6 +23,9 @@ class Server:
         while(True):
             fileInfo=self.clientSocket.recv(BUFFER_SIZE)
             if not fileInfo:
+                if int(time.time())-self.linkTime>30:
+                    print("timeout!")
+                    break
                 continue
             infoList=fileInfo.split("|")
             fileName=""
