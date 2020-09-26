@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import face_recognition as fr
 import cv2
 import os

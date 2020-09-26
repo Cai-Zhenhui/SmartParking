@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 #客户端程序 负责采集照片发送到服务器处理
 from picamera.array import PiRGBArray
 from picamera import PiCamera
