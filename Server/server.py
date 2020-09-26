@@ -28,9 +28,10 @@ class Server:
                     print("timeout!")
                     break
                 continue
-            
+            print(fileInfo)
             infoList=fileInfo.decode().split("|")
             print(infoList)
+            print("!!!!!!!!!!!1")
             fileName=""
             fileSize=0
             if len(infoList)==3:
