@@ -1,5 +1,6 @@
 import os
 import socket
+import time
 IP="47.93.148.239"
 PORT=2222
 BUFFER_SIZE=1024
@@ -24,7 +25,13 @@ class Client:
         #发送文件信息
         self.socket.send(fileInfo.encode())
         tempBuffer=self.socket.recv(BUFFER_SIZE)
-        print(tempBuffer)
+        tempTime=int(time.time())
+        while not tempBuffer:
+            if int(time.time)-tempTime>30:
+                print("timeout!")
+                return
+            tempBuffer=self.socket.recv(BUFFER_SIZE)
+        tempBuffer=str(tempBuffer)
         if int(tempBuffer)!=FLAG_HEAD_RECV:
             print("ERROR")
             pass
