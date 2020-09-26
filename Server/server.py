@@ -1,7 +1,7 @@
 import os
 import socket
 import time
-IP=socket.INADDR_ANY
+IP='0.0.0.0'
 PORT=2222
 BUFFER_SIZE=1024
 class Server:
