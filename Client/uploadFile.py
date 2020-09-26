@@ -23,12 +23,12 @@ class Client:
         #post|name|字节大小
         fileInfo="post|%s|%s"%(fileName,fileSize)
         print(fileInfo)
-        
+
         #发送文件头长度 该部分不超过3字节
-        self.socket.send(("%03d"%(len(fileInfo))).encode())
+        self.socket.send(("%03d"%(len(fileInfo))).encode('utf-8'))
 
         #发送文件信息
-        self.socket.send(fileInfo.encode())
+        self.socket.send(fileInfo.encode('utf-8'))
         tempBuffer=self.socket.recv(BUFFER_SIZE)
         tempTime=int(time.time())
         while not tempBuffer:
