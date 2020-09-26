@@ -41,19 +41,19 @@ class Server:
                 self.clientSocket.send(str(FLAG_HEAD_RECV).encode())
                 
                 data=b''
-                totalData=b''
                 size=0
                 #准备接受数据
                 data=self.clientSocket.recv(BUFFER_SIZE)
                 size+=BUFFER_SIZE
-                totalData+=data
-                while(size<fileSize):
-                    data=self.clientSocket.recv(BUFFER_SIZE)
-                    print(size,end=' ')
-                    size+=BUFFER_SIZE
-                    totalData+=data
-                    print(len(totalData))
+                with open(fileName,"wb") as target:
+                    target.write(data)
+                    while(size<fileSize):
+                        data=self.clientSocket.recv(BUFFER_SIZE)
+                        size+=BUFFER_SIZE
+                        target.write(data)
+                        pass
                     pass
+
                 #发送接收完毕标志
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
                 with open(fileName,"wb") as target:
