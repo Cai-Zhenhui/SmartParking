@@ -49,9 +49,10 @@ class Server:
                 totalData+=data
                 while(size<fileSize):
                     data=self.clientSocket.recv(BUFFER_SIZE)
-                    print(size)
+                    print(size,end=' ')
                     size+=BUFFER_SIZE
                     totalData+=data
+                    print(len(totalData))
                     pass
                 #发送接收完毕标志
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
