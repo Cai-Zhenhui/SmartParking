@@ -28,7 +28,7 @@ class Server:
                     print("timeout!")
                     break
                 continue
-            infoList=fileInfo.split("|")
+            infoList=str(fileInfo).split("|")
             fileName=""
             fileSize=0
             if len(infoList)==3:
