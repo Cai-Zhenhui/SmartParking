@@ -19,6 +19,8 @@ class Server:
     def run(self):
         while(True):
             data=self.clientSocket.recv(BUFFER_SIZE)
+            if not data:
+                continue
             print(data)
             self.clientSocket.send(('[%s] %s' % (time.ctime(), data)).encode())
             pass
