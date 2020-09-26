@@ -49,6 +49,7 @@ class Server:
                 totalData+=data
                 while(size<fileSize):
                     data=self.clientSocket.recv(BUFFER_SIZE)
+                    print(size)
                     size+=BUFFER_SIZE
                     totalData+=data
                     pass
