@@ -56,9 +56,6 @@ class Server:
 
                 #发送接收完毕标志
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
-                with open(fileName,"wb") as target:
-                    target.write(totalData)
-                    pass
                 pass
             self.clientSocket.send(('[%s] %s' % (time.ctime(), data)).encode())
             pass
