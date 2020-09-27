@@ -70,10 +70,12 @@ class Server:
                 #发送接收完毕标志
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
                 if imgType=="Face":
-                    
+                    print("将处理 FACE")
                     pass
                 elif imgType=="LP":
+                    print("将处理 LP")
                     r, roi, color = self.c.predict(fileName)
+                    print(r,roi,color)
                     lp=""
                     for i in range(len(r)):
                         lp=lp+r[i]
