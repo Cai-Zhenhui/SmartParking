@@ -92,6 +92,7 @@ class Server:
 
 class myThread (threading.Thread):
     def __init__(self):
+        threading.Thread.__init__(self)
         self.server=Server()
         pass
     def __del__(self):
@@ -108,4 +109,5 @@ if __name__ == "__main__":
     socketThread.start()
     a=input("input 'q' exit:")
     socketThread.server.isExit=True
+    socketThread.join()
     pass
