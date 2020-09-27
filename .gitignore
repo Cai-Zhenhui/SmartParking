@@ -4,3 +4,7 @@ Client/*.png
 Server/*.bmp
 Server/*.jpg
 Server/*.png
+Server/*.png
+Server/config.js
+Server/*.dat
+Server/train/*.*
