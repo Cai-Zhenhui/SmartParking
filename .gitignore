@@ -1,2 +1,6 @@
 Client/*.bmp
 Client/*.jpg
+Client/*.png
+Server/*.bmp
+Server/*.jpg
+Server/*.png

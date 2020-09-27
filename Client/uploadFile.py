@@ -22,7 +22,7 @@ class Client:
         fileSize=os.stat(path).st_size
         #构造文件信息
         #post|name|字节大小
-        fileInfo="post|%s|%s"%(fileName,fileSize)
+        fileInfo="LP|%s|%s"%(fileName,fileSize)
         print(fileInfo)
 
         #发送文件头长度 该部分不超过3字节
@@ -30,18 +30,20 @@ class Client:
 
         #发送文件信息
         self.socket.send(fileInfo.encode('utf-8'))
-        tempBuffer=self.socket.recv(BUFFER_SIZE)
+        #接受 服务端反馈
+        tempBuffer=self.socket.recv(1)
         tempTime=int(time.time())
         while not tempBuffer:
             if int(time.time())-tempTime>30:
                 print("timeout!")
                 return
-            tempBuffer=self.socket.recv(BUFFER_SIZE)
+            tempBuffer=self.socket.recv(1)
         tempBuffer=tempBuffer.decode()
         if int(tempBuffer)!=FLAG_HEAD_RECV:
             print("ERROR")
             pass
-        #发送文件实体
+
+        #收到反馈 发送文件实体
         with open(path,"rb") as target:
             data=target.read()
             self.socket.sendall(data)
@@ -50,6 +52,28 @@ class Client:
                 self.socket.send(data)
                 pass
             pass
+        #接受标志
+        tempBuffer=self.socket.recv(1)
+        tempTime=int(time.time())
+        while not tempBuffer:
+            if int(time.time())-tempTime>30:
+                print("timeout!")
+                return
+            tempBuffer=self.socket.recv(1)
+        tempBuffer=tempBuffer.decode()
+        if int(tempBuffer)!=FLAG_HEAD_RECV:
+            print("ERROR")
+            pass
+        #接受返回信息
+        tempBuffer=self.socket.recv(BUFFER_SIZE)
+        tempTime=int(time.time())
+        while not tempBuffer:
+            if int(time.time())-tempTime>30:
+                print("timeout!")
+                return
+            tempBuffer=self.socket.recv(BUFFER_SIZE)
+        tempBuffer=tempBuffer.decode()
+
         pass
     def sendString(self,str):
         data=input(">:")
