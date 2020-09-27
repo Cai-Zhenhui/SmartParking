@@ -40,7 +40,7 @@ class Client:
             tempBuffer=self.socket.recv(1)
         tempBuffer=tempBuffer.decode()
         if int(tempBuffer)!=FLAG_HEAD_RECV:
-            print("ERROR")
+            print("ERROR FLAG_HEAD_RECV")
             pass
 
         #收到反馈 发送文件实体
@@ -61,8 +61,8 @@ class Client:
                 return
             tempBuffer=self.socket.recv(1)
         tempBuffer=tempBuffer.decode()
-        if int(tempBuffer)!=FLAG_HEAD_RECV:
-            print("ERROR")
+        if int(tempBuffer)!=FLAG_FILE_RECV:
+            print("ERROR FLAG_FILE_RECV")
             pass
         #接受返回信息
         tempBuffer=self.socket.recv(BUFFER_SIZE)

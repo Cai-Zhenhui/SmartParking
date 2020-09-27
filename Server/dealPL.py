@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import cv2
+from PIL import Image
+from PIL import ImageFile
+import imghdr
 import numpy as np
 from numpy.linalg import norm
 import sys
@@ -15,6 +18,9 @@ PROVINCE_START = 1000
 
 # 读取图片文件
 def imreadex(filename):
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+    if imghdr.what(filename)=="png":
+        Image.open(filename).convert("RGB").save(filename)
     return cv2.imdecode(np.fromfile(filename, dtype=np.uint8), cv2.IMREAD_COLOR)
 
 
