@@ -5,7 +5,7 @@ import time
 import threading
 import dealPL
 import dealFace
-IP='0.0.0.0'
+IP=''
 PORT=2222
 BUFFER_SIZE=1024
 FLAG_HEAD_RECV=1
