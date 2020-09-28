@@ -16,13 +16,18 @@ class Client:
     def __del__(self):
         self.socket.close()
     pass
-    def sendFile(self,filePath):
+    def sendFile(self,filePath,isFace):
         path=os.path.join(self.currentDir,filePath)
         fileName=os.path.basename(path)
         fileSize=os.stat(path).st_size
         #构造文件信息
         #post|name|字节大小
-        fileInfo="LP|%s|%s"%(fileName,fileSize)
+        if isFace:
+            fileInfo="Face|%s|%s"%(fileName,fileSize)
+            pass
+        else:
+            fileInfo="LP|%s|%s"%(fileName,fileSize)
+            pass
         print(fileInfo)
 
         #发送文件头长度 该部分不超过3字节
@@ -73,7 +78,7 @@ class Client:
                 return
             tempBuffer=self.socket.recv(BUFFER_SIZE)
         tempBuffer=tempBuffer.decode()
-
+        print("结果：",tempBuffer)
         pass
     def sendString(self,str):
         data=input(">:")
@@ -84,5 +89,5 @@ class Client:
     pass
 if __name__ == "__main__":
     c=Client()
-    c.sendFile(input("input fileName:"))
+    c.sendFile(input("input fileName:"),False)
     pass

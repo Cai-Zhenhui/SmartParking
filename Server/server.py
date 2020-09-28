@@ -31,17 +31,16 @@ class Server:
         self.linkTime=int(time.time())
         while(not self.isExit):
             temp=self.clientSocket.recv(3)
-            print(temp)
             sizeInfo=int(temp.decode())
+            print("head size:",sizeInfo)
+
             fileInfo=self.clientSocket.recv(sizeInfo)
-            print(fileInfo)
             if not fileInfo:
                 time.sleep(1)
                 continue
-            print(fileInfo)
             infoList=fileInfo.decode().split("|")
             print(infoList)
-            print("!!!!!!!!!!!")
+
             imgType=""#face or LP
             fileName=""
             fileSize=0
@@ -53,19 +52,23 @@ class Server:
                 #发送头信息接受完成标志
                 self.clientSocket.send(str(FLAG_HEAD_RECV).encode())
                 
-                data=b''
+                buffer=b''
+                totalData=b''
                 size=0
                 #准备接受数据
-                data=self.clientSocket.recv(BUFFER_SIZE)
+                buffer=self.clientSocket.recv(BUFFER_SIZE)
                 size+=BUFFER_SIZE
+                totalData+=buffer
+                while(len(totalData)<fileSize):
+                    buffer=self.clientSocket.recv(BUFFER_SIZE)
+                    size+=BUFFER_SIZE
+                    totalData+=buffer
+                    pass#end while(len(totalData)<fileSize):
+
                 with open(fileName,"wb") as target:
-                    target.write(data)
-                    while(size<fileSize):
-                        data=self.clientSocket.recv(BUFFER_SIZE)
-                        size+=BUFFER_SIZE
-                        target.write(data)
-                        pass
+                    target.write(totalData)
                     pass
+                print("接收完毕")
 
                 #发送接收完毕标志
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
@@ -75,12 +78,13 @@ class Server:
                 elif imgType=="LP":
                     print("将处理 LP")
                     r, roi, color = self.c.predict(fileName)
-                    print(r,roi,color)
+                    print("结果：",r)
                     lp=""
                     for i in range(len(r)):
                         lp=lp+r[i]
                         pass
                     if len(r)<6:
+                        print()
                         self.clientSocket.send(lp.encode("utf-8"))
                         pass
                     else:
