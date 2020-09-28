@@ -1,6 +1,7 @@
 Client/*.bmp
 Client/*.jpg
 Client/*.png
+Client/__pycache__/
 Server/*.bmp
 Server/*.jpg
 Server/*.png
@@ -8,3 +9,4 @@ Server/*.png
 Server/config.js
 Server/*.dat
 Server/train/*.*
+Server/__pycache__/

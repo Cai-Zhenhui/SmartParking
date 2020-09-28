@@ -31,6 +31,7 @@ class Server:
         print("Connect Addr:",self.clientAddr)
         self.linkTime=int(time.time())
         while(not self.isExit):
+            print("等待新的文件")
             temp=self.clientSocket.recv(3)
             sizeInfo=int(temp.decode())
             print("head size:",sizeInfo)
