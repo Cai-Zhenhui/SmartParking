@@ -8,6 +8,7 @@ import dealFace
 IP='0.0.0.0'
 PORT=2222
 BUFFER_SIZE=1024
+FLAG_HEADSIZE_RECV=3
 FLAG_HEAD_RECV=1
 FLAG_FILE_RECV=2
 class Server:
@@ -37,6 +38,8 @@ class Server:
                 time.sleep(0.1)
                 continue
             sizeInfo=int(temp.decode())
+            #发送头信息大小接受完成标志
+            self.clientSocket.send(str(FLAG_HEADSIZE_RECV).encode())
             print("head size:",sizeInfo)
 
             fileInfo=self.clientSocket.recv(sizeInfo)

@@ -5,6 +5,7 @@ import time
 IP="47.93.148.239"
 PORT=2222
 BUFFER_SIZE=1024
+FLAG_HEADSIZE_RECV=3
 FLAG_HEAD_RECV=1
 FLAG_FILE_RECV=2
 class Client:
@@ -32,6 +33,22 @@ class Client:
 
         #发送文件头长度 该部分不超过3字节
         self.socket.send(("%03d"%(len(fileInfo))).encode('utf-8'))
+        #接受 服务端反馈
+        tempBuffer=self.socket.recv(1)
+        tempTime=int(time.time())
+        while not tempBuffer:
+            if int(time.time())-tempTime>10:
+                print("timeout!")
+                #发送文件头长度 该部分不超过3字节
+                self.socket.send(("%03d"%(len(fileInfo))).encode('utf-8'))
+                if input()=="q":
+                    return "NULL"
+                continue
+            tempBuffer=self.socket.recv(1)
+        tempBuffer=tempBuffer.decode()
+        if int(tempBuffer)!=FLAG_HEADSIZE_RECV:
+            print("ERROR FLAG_HEADSIZE_RECV")
+            pass
 
         #发送文件信息
         self.socket.send(fileInfo.encode('utf-8'))

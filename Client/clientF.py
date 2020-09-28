@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import cv2
 import os
+import time
 import uploadFile
 camera=cv2.VideoCapture(0)
 cascader=cv2.CascadeClassifier("Client"+os.path.sep+"haarcascade_frontalface_default.xml")
@@ -22,5 +23,6 @@ while True:
     cv2.imwrite("tmp.jpg",frame)
     c=uploadFile.Client()
     print("结果：",c.sendFile("tmp.jpg",True))
+    time.sleep(1)
     cv2.imshow("camera",frame)
     pass
