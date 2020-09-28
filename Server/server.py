@@ -83,7 +83,7 @@ class Server:
                     for i in range(len(r)):
                         lp=lp+r[i]
                         pass
-                    if len(r)<6:
+                    if len(r)>6:
                         print()
                         self.clientSocket.send(lp.encode("utf-8"))
                         pass
