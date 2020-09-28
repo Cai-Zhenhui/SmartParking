@@ -84,12 +84,14 @@ class Server:
                     print("将处理 FACE")
                     ret=dealFace.deal(fileName)
                     print(ret)
+                    self.clientSocket.send(str(ret).encode("utf-8"))
+                    '''
                     if len(ret)!=0:
                         self.clientSocket.send(str(ret).encode("utf-8"))
                         pass
                     else:
                         self.clientSocket.send("NULL".encode("utf-8"))
-                        pass
+                        pass'''
                     pass#end if imgType=="Face":
                 elif imgType=="LP":
                     print("将处理 LP")

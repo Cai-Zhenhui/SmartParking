@@ -23,7 +23,11 @@ while True:
         pass#end elif choose==ord('g'):
     cv2.imwrite("tmp.jpg",frame)
     
-    print("结果：",c.sendFile("tmp.jpg",True))
-    time.sleep(1)
+    rects=eval(c.sendFile("tmp.jpg",True))
+    if len(rects)!=0:
+        for t,r,b,l in rects:
+            cv2.rectangle(frame,(l,t),(r,b),(255,0,0),10)
+            pass
+        pass
     cv2.imshow("camera",frame)
     pass

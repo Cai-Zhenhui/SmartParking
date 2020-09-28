@@ -96,7 +96,7 @@ class Client:
                 return
             tempBuffer=self.socket.recv(BUFFER_SIZE)
         tempBuffer=tempBuffer.decode()
-        print("结果：",tempBuffer)
+        #print("结果：",tempBuffer)
         return tempBuffer
         pass
     def sendString(self,str):
