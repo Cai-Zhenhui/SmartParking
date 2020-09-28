@@ -33,6 +33,9 @@ class Server:
         while(not self.isExit):
             print("等待新的文件")
             temp=self.clientSocket.recv(3)
+            if not temp:
+                time.sleep(0.1)
+                continue
             sizeInfo=int(temp.decode())
             print("head size:",sizeInfo)
 
