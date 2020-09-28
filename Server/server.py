@@ -4,6 +4,7 @@ import socket
 import time
 import threading
 import dealPL
+import dealFace
 IP='0.0.0.0'
 PORT=2222
 BUFFER_SIZE=1024
@@ -74,7 +75,15 @@ class Server:
                 self.clientSocket.send(str(FLAG_FILE_RECV).encode())
                 if imgType=="Face":
                     print("将处理 FACE")
-                    pass
+                    ret=dealFace.deal(fileName)
+                    print(ret)
+                    if len(ret)!=0:
+                        self.clientSocket.send(str(ret).encode("utf-8"))
+                        pass
+                    else:
+                        self.clientSocket.send("NULL".encode("utf-8"))
+                        pass
+                    pass#end if imgType=="Face":
                 elif imgType=="LP":
                     print("将处理 LP")
                     r, roi, color = self.c.predict(fileName)
@@ -84,7 +93,6 @@ class Server:
                         lp=lp+r[i]
                         pass
                     if len(r)>6:
-                        print()
                         self.clientSocket.send(lp.encode("utf-8"))
                         pass
                     else:
