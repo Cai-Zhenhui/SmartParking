@@ -10,9 +10,10 @@ FLAG_HEAD_RECV=1
 FLAG_FILE_RECV=2
 class Client:
     def __init__(self):
-        self.socket=socket.socket()
+        self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket.connect((IP,PORT))
         self.currentDir=os.path.dirname(os.path.abspath(__file__))
+        #self.socket.setblocking(0)
         pass
     def __del__(self):
         self.socket.close()

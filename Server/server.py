@@ -106,6 +106,7 @@ class Server:
                         self.clientSocket.send("NULL".encode("utf-8"))
                         pass
                     pass#end elif imgType=="LP":
+                self.clientSocket.send(str(FLAG_FILE_RECV).encode())
                 pass#end if len(infoList)==3:
             pass
         pass
