@@ -25,5 +25,5 @@ if __name__ == "__main__":
     lp=input()
     name=input()
     fileName=input()
-    regist(lp,name,fileName))
+    regist(lp,name,fileName)
     pass
