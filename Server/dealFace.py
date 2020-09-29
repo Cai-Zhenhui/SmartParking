@@ -24,6 +24,7 @@ def regist(lp,name,fileName):
     strImgCode=strImgCode[0:-1]+"]"
 
     sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,strImgCode)
+    print(sql)
     try:
         ret=cursor.execute(sql)
         print("SQL:",ret)
