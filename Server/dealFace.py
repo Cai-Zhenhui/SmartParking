@@ -11,6 +11,38 @@ def deal(fileName):
     ret=fr.face_locations(img)
     return ret
     pass
+def find(tel,lp,name,fileName):
+    db=pymysql.connect(IP,user,password,dbname,charset='utf8')
+    cursor=db.cursor()
+    img=fr.load_image_file(fileName)
+    targetImgCode=fr.face_encodings(img,num_jitters=3)[0]
+    
+    sql="select * from user"
+    ret=""
+    try:
+        ret=cursor.execute(sql)
+        print("SQL:",ret)
+        ret=cursor.fetchall()
+        
+        pass
+    except:
+        print("查询异常")
+        db.close()
+        return "NULL"
+        pass
+    
+    #对比
+    for row in ret:
+        imgCode=eval(row[4])
+        if fr.compare_faces(targetImgCode,imgCode):
+            #找到了
+            db.close()
+            return row[3]
+            pass
+        pass#end for
+    db.close()
+    return "NULL"
+    pass
 def regist(tel,lp,name,fileName):
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
@@ -37,5 +69,5 @@ def regist(tel,lp,name,fileName):
     pass
 if __name__ == "__main__":
     #regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
-    regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
+    #regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
     pass
