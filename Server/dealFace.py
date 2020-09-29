@@ -11,7 +11,7 @@ def deal(fileName):
     ret=fr.face_locations(img)
     return ret
     pass
-def regist(lp,name,fileName):
+def regist(tel,lp,name,fileName):
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
     img=fr.load_image_file(fileName)
@@ -23,7 +23,7 @@ def regist(lp,name,fileName):
         pass
     strImgCode=strImgCode[0:-1]+"]"
 
-    sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,strImgCode)
+    sql="insert into user values('%s','%s','%s','%s','%s')"%(tel,name,"123456",lp,strImgCode)
     print(sql)
     try:
         ret=cursor.execute(sql)
@@ -36,6 +36,6 @@ def regist(lp,name,fileName):
     db.close()
     pass
 if __name__ == "__main__":
-    #regist("辽A0AE12","罗涵泽","lhz.jpg")
-    regist("苏E05EV8","王吉哲","wjz.jpg")
+    #regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
+    regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
     pass
