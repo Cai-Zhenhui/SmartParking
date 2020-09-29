@@ -27,7 +27,6 @@ def find(tel,lp,name,fileName):
         ret=cursor.execute(sql)
         print("SQL:",ret)
         ret=cursor.fetchall()
-        
         pass
     except:
         print("查询异常")
@@ -39,7 +38,7 @@ def find(tel,lp,name,fileName):
     for row in ret:
         imgCode=np.array(eval(row[4]))
         print(eval(row[4]))
-        if fr.compare_faces(targetImgCode,imgCode,0.3):
+        if fr.compare_faces(targetImgCode,imgCode,0.1):
             #找到了
             db.close()
             return row[3]
