@@ -23,12 +23,9 @@ while True:
             pass'''
         cv2.imwrite("tmp.jpg",frame)
 
-        rects=eval(c.sendFile("tmp.jpg",True))
-        if len(rects)!=0:
-            for t,r,b,l in rects:
-                cv2.rectangle(frame,(l,t),(r,b),(255,0,0),10)
-                pass
-            pass
+        ret=c.sendFile("tmp.jpg",True)
+        print(ret)
+        input()
         pass#end elif choose==ord('g'):
     cv2.imwrite("tmp.jpg",frame)
     w,h=frame.shape[:2]
