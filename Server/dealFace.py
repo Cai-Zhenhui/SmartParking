@@ -14,7 +14,7 @@ def deal(fileName):
     pass
 def find(tel,lp,name,fileName):
     img=fr.load_image_file(fileName)
-    targetImgCode=fr.face_encodings(img,num_jitters=3)
+    targetImgCode=fr.face_encodings(img,num_jitters=10)
     if len(targetImgCode)<1:
         return "NULL"#没有人脸
         pass
@@ -51,7 +51,7 @@ def regist(tel,lp,name,fileName):
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
     img=fr.load_image_file(fileName)
-    imgCode=fr.face_encodings(img,num_jitters=5)[0]
+    imgCode=fr.face_encodings(img,num_jitters=20)[0]
     #生成字符串
     strImgCode="["
     for i in imgCode:
@@ -72,6 +72,6 @@ def regist(tel,lp,name,fileName):
     db.close()
     pass
 if __name__ == "__main__":
-    #regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
-    #regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
+    regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
+    regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
     pass
