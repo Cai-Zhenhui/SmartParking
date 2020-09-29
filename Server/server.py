@@ -4,6 +4,7 @@ import socket
 import time
 import threading
 import dealPL
+import dealPL2
 import dealFace
 IP='0.0.0.0'
 PORT=2222
@@ -14,7 +15,7 @@ FLAG_FILE_RECV=2
 class Server:
     def __init__(self):
         #self.imgPath="."+os.path.sep+"Server"+os.path.sep+"upload"+os.path.sep
-        self.c = dealPL.CardPredictor()
+        self.c = dealPL2.CardPredictor()
         self.c.train_svm()
         
         self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -100,7 +101,7 @@ class Server:
                         pass
                     except BaseException:
                         pass
-                    
+
                     print("结果：",r)
                     lp=""
                     for i in range(len(r)):
