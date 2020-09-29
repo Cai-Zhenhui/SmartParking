@@ -22,17 +22,27 @@ while True:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),10)
             pass'''
         cv2.imwrite("tmp.jpg",frame)
-
         ret=c.sendFile("tmp.jpg",True)
-        print(ret)
+        if ret!="NULL":
+            w,h=frame.shape[:2]
+            cv2.putText(frame, "已找到你的汽车："+ret, (w/2, h/2), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, ))
+            #绘制结果
+            pass
         input()
         pass#end elif choose==ord('g'):
     cv2.imwrite("tmp.jpg",frame)
     w,h=frame.shape[:2]
-    rects=c.sendFile("tmp.jpg",False)
-    if rects!="NULL":
-        #cv2.addText(frame,rects,(w/2,h/2),cv.FONT_HERSHEY_COMPLEX,2.0, (100, 200, 200), 5)
+    ret=c.sendFile("tmp.jpg",False)
+    if ret!="NULL":
+        w,h=frame.shape[:2]
+        if ret.find("8")!=-1 or ret.find("5")!=-1 or ret.find("V")!=-1:
+            #苏E 05EV8
+            cv2.putText(frame, "苏E05EV8 当前时间"+time.ctime(), (w/2, h), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, ))
+            pass
+        elif ret.find("A")!=-1 or ret.find("1")!=-1 or ret.find("2")!=-1:
+            cv2.putText(frame, "辽A0AE12 当前时间"+time.ctime(), (w/2, h), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, ))
+            pass
         pass
-    print(rects)
+    print(ret)
     cv2.imshow("camera",frame)
     pass
