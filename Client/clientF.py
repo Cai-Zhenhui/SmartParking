@@ -4,7 +4,7 @@ import os
 import time
 import uploadFile
 c=uploadFile.Client()
-camera=cv2.VideoCapture(0)
+camera=cv2.VideoCapture(1)
 cascader=cv2.CascadeClassifier("Client"+os.path.sep+"haarcascade_frontalface_default.xml")
 while True:
     ret,frame=camera.read()
