@@ -16,7 +16,7 @@ def regist(lp,name,fileName):
     cursor=db.cursor()
     img=fr.load_image_file(fileName)
     imgCode=fr.face_encodings(img,num_jitters=5)
-    sql="insert into user values(%s,%s,%s,%s,%s)"%("12312341234",name,"123456",lp,str(imgCode[0]).replace('\n',''))
+    sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,str(imgCode[0]).replace('\n',''))
     ret=cursor.execute(sql)
     print("SQL:",ret)
     db.close()
