@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import face_recognition as fr
+import numpy as np
 import pymysql
 IP="localhost"
 user="root"
@@ -33,7 +34,7 @@ def find(tel,lp,name,fileName):
     
     #对比
     for row in ret:
-        imgCode=eval(row[4])
+        imgCode=np.array(eval(row[4]))
         if fr.compare_faces(targetImgCode,imgCode):
             #找到了
             db.close()
