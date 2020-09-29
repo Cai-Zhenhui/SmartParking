@@ -52,11 +52,11 @@ def regist(tel,lp,name,fileName):
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
     img=fr.load_image_file(fileName)
-    imgCode=fr.face_encodings(img,num_jitters=20)[0]
+    imgCode=fr.face_encodings(img,num_jitters=10)[0]
     #生成字符串
     strImgCode="["
     for i in imgCode:
-        strImgCode+="%.7f,"%i
+        strImgCode+="%f,"%i
         pass
     strImgCode=strImgCode[0:-1]+"]"
 
