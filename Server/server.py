@@ -95,7 +95,12 @@ class Server:
                     pass#end if imgType=="Face":
                 elif imgType=="LP":
                     print("将处理 LP")
-                    r, roi, color = self.c.predict(fileName)
+                    try:
+                        r, roi, color = self.c.predict(fileName)
+                        pass
+                    except BaseException:
+                        pass
+                    
                     print("结果：",r)
                     lp=""
                     for i in range(len(r)):
