@@ -38,7 +38,7 @@ def find(tel,lp,name,fileName):
     for row in ret:
         imgCode=np.array(eval(row[4]))
         print(eval(row[4]))
-        if fr.compare_faces(targetImgCode,imgCode,0.1)[0]:
+        if fr.compare_faces(targetImgCode,imgCode,0.5)[0]:
             #找到了
             db.close()
             return row[3]
