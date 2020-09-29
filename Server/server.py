@@ -90,6 +90,7 @@ class Server:
                     pass#end if imgType=="Face":
                 elif imgType=="LP":
                     print("将处理 LP")
+                    r=""
                     try:
                         r, roi, color = self.c.predict(fileName)
                         pass

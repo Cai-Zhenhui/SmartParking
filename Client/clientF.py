@@ -2,6 +2,8 @@
 import cv2
 import os
 import time
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
 import uploadFile
 c=uploadFile.Client()
 camera=cv2.VideoCapture(1)
@@ -11,6 +13,7 @@ while True:
     if not ret:
         break
     choose=cv2.waitKey(1)
+    img=Image.fromarray(frame)
     if choose==ord('q'):
         break
     elif choose==ord('g'):
@@ -25,7 +28,10 @@ while True:
         ret=c.sendFile("tmp.jpg",True)
         if ret!="NULL":
             w,h=frame.shape[:2]
-            cv2.putText(frame, "已找到你的汽车："+ret, (int(w/2), int(h/2)), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, ))
+            draw=ImageDraw.Draw(img)
+            ttf = ImageFont.load_default()
+            draw.text((int(w/2), int(h/2)),"已找到你的汽车："+ret,(255, 0, 0),font=ttf)
+            #cv2.putText(frame, "已找到你的汽车："+ret, (int(w/2), int(h/2)), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 0, 0))
             #绘制结果
             pass
         input()
@@ -35,7 +41,10 @@ while True:
     ret=c.sendFile("tmp.jpg",False)
     if ret!="NULL":
         w,h=frame.shape[:2]
-        cv2.putText(frame, ret+" 当前时间"+time.ctime(), (int(w/2), h), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, ))
+        draw=ImageDraw.Draw(img)
+        ttf = ImageFont.load_default()
+        draw.text((int(w/2), int(h/2)),ret+" 当前时间"+time.ctime(),(255, 0, 0),font=ttf)
+        #cv2.putText(frame, ret+" 当前时间"+time.ctime(), (int(w/2), int(h/2)), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 0, ))
         '''
         if ret.find("8")!=-1 or ret.find("5")!=-1 or ret.find("V")!=-1:
             #苏E 05EV8
@@ -46,5 +55,7 @@ while True:
             pass'''
         pass
     print(ret)
-    cv2.imshow("camera",frame)
+    cv2.imshow("camera",np.array(img))
     pass
+camera.release()
+cv2.destroyAllWindows()
