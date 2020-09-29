@@ -15,8 +15,15 @@ def regist(lp,name,fileName):
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
     img=fr.load_image_file(fileName)
-    imgCode=fr.face_encodings(img,num_jitters=5)
-    sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,str(imgCode[0]).replace('\n',''))
+    imgCode=fr.face_encodings(img,num_jitters=5)[0]
+    #生成字符串
+    strImgCode="["
+    for i in imgCode:
+        strImgCode+="%.7f,"%i
+        pass
+    strImgCode=strImgCode[0:-1]+"]"
+
+    sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,strImgCode)
     ret=cursor.execute(sql)
     print("SQL:",ret)
     db.close()
