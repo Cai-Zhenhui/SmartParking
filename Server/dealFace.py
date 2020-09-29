@@ -13,11 +13,14 @@ def deal(fileName):
     return ret
     pass
 def find(tel,lp,name,fileName):
+    img=fr.load_image_file(fileName)
+    targetImgCode=fr.face_encodings(img,num_jitters=3)
+    if len(targetImgCode)<1:
+        return "NULL"#没有人脸
+        pass
+    targetImgCode=targetImgCode[0]
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
-    img=fr.load_image_file(fileName)
-    targetImgCode=fr.face_encodings(img,num_jitters=3)[0]
-    
     sql="select * from user"
     ret=""
     try:
