@@ -15,7 +15,7 @@ FLAG_FILE_RECV=2
 class Server:
     def __init__(self):
         #self.imgPath="."+os.path.sep+"Server"+os.path.sep+"upload"+os.path.sep
-        self.c = dealPL2.CardPredictor()
+        self.c = dealPL.CardPredictor()
         self.c.train_svm()
         
         self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -105,6 +105,8 @@ class Server:
                     print("结果：",r)
                     lp=""
                     for i in range(len(r)):
+                        if i>7:
+                            break
                         lp=lp+r[i]
                         pass
                     if len(r)>6:
