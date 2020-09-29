@@ -24,8 +24,14 @@ def regist(lp,name,fileName):
     strImgCode=strImgCode[0:-1]+"]"
 
     sql="insert into user values('%s','%s','%s','%s','%s')"%("12312341234",name,"123456",lp,strImgCode)
-    ret=cursor.execute(sql)
-    print("SQL:",ret)
+    try:
+        ret=cursor.execute(sql)
+        print("SQL:",ret)
+        db.commit()
+        pass
+    except:
+        db.rollback()
+        pass
     db.close()
     pass
 if __name__ == "__main__":
