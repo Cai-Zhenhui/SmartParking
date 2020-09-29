@@ -18,7 +18,7 @@ def find(tel,lp,name,fileName):
     if len(targetImgCode)<1:
         return "NULL"#没有人脸
         pass
-    targetImgCode=targetImgCode[0]
+    #targetImgCode=targetImgCode[0]
     db=pymysql.connect(IP,user,password,dbname,charset='utf8')
     cursor=db.cursor()
     sql="select * from user"
