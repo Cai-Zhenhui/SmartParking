@@ -4,7 +4,7 @@ import os
 import time
 import uploadFile
 c=uploadFile.Client()
-camera=cv2.VideoCapture(0)
+camera=cv2.VideoCapture(1)
 cascader=cv2.CascadeClassifier("Client"+os.path.sep+"haarcascade_frontalface_default.xml")
 while True:
     ret,frame=camera.read()
@@ -31,7 +31,11 @@ while True:
             pass
         pass#end elif choose==ord('g'):
     cv2.imwrite("tmp.jpg",frame)
+    w,h=frame.shape[:2]
     rects=c.sendFile("tmp.jpg",False)
+    if rects!="NULL":
+        #cv2.addText(frame,rects,(w/2,h/2),cv.FONT_HERSHEY_COMPLEX,2.0, (100, 200, 200), 5)
+        pass
     print(rects)
     cv2.imshow("camera",frame)
     pass
