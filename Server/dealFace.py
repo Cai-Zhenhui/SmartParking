@@ -35,6 +35,6 @@ def regist(lp,name,fileName):
     db.close()
     pass
 if __name__ == "__main__":
-    regist("辽A0AE12","罗涵泽","lhz.jpg")
+    #regist("辽A0AE12","罗涵泽","lhz.jpg")
     regist("苏E05EV8","王吉哲","wjz.jpg")
     pass
