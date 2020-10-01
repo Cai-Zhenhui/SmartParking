@@ -72,6 +72,7 @@ def regist(tel,lp,name,fileName):
     db.close()
     pass
 if __name__ == "__main__":
-    regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
+    #regist("12312341234","辽A0AE12","罗涵泽","lhz.jpg")
+    regist("12312341234","辽A0AE12","李政祎","lzy.jpg")
     regist("12312340000","苏E05EV8","王吉哲","wjz.jpg")
     pass
