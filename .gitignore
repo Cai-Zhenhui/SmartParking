@@ -1,11 +1,14 @@
 Client/*.bmp
 Client/*.jpg
 Client/*.png
+Client/*F.*
 Client/__pycache__/
 Server/*.bmp
 Server/*.jpg
 Server/*.png
 Server/*.png
+Client/*F.*
+Server/test*.*
 Server/config.js
 Server/*.dat
 Server/train/*.*

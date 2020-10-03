@@ -13,12 +13,14 @@ import cv2
 import time
 import uploadFile
 import bluetooth
-count=0
+
 class Ui_Form(object):
     def setupUi(self, Form):
         self.c=uploadFile.Client()
         self.serCar=bluetooth.BlueTooth(bluetooth.PORT_CAR,9600)
         self.serSW=bluetooth.BlueTooth(bluetooth.PORT_SW,9600)
+        self.count=0
+        self.count2=0
 
         Form.setObjectName("Form")
         Form.resize(925, 732)
@@ -36,6 +38,11 @@ class Ui_Form(object):
         self.textBrowser = QtWidgets.QTextBrowser(self.frame_2)
         self.textBrowser.setMaximumSize(QtCore.QSize(16777215, 900))
         self.textBrowser.setObjectName("textBrowser")
+        font = QtGui.QFont()
+        font.setFamily("Microsoft JhengHei UI")
+        font.setPointSize(24)
+        self.textBrowser.setFont(font)
+
         self.verticalLayout.addWidget(self.textBrowser)
         self.frame_3 = QtWidgets.QFrame(self.frame_2)
         self.frame_3.setMaximumSize(QtCore.QSize(16777215, 900))
@@ -91,9 +98,10 @@ class Ui_Form(object):
         self.cameraLP=cv2.VideoCapture(1)
         self.imgLP=ImgView(self.cameraLP,self.frame)
         self.imgLP.player()
-
         self.imgLP.setObjectName("imgLP")
         self.gridLayout_2.addWidget(self.imgLP, 3, 0, 1, 1)
+        #936, 590
+
         self.label = QtWidgets.QLabel(self.frame)
         self.label.setMaximumSize(QtCore.QSize(16777215, 23))
         font = QtGui.QFont()
@@ -131,20 +139,16 @@ class Ui_Form(object):
         cv2.imwrite("tmp.jpg",self.imgLP.frame)
         ret=self.c.sendFile("tmp.jpg",False)
         if ret!="NULL":
-            count+=1
-            if count==1:
-                self.textBrowser.append("您的车【"+ret+"】将停到 9号车位.停车时间"+time.ctime())
-                self.serSW.send("1".encode())
-                time.sleep(1)
-                self.serCar.send()
-                pass
-            elif count==2:
-                self.textBrowser.append("您的车【"+ret+"】将停到18号车位.停车时间"+time.ctime())
-                self.serSW.send("3".encode())
-                time.sleep(1)
-                self.serCar.send()
-                pass
+            self.textBrowser.clear()
+            self.textBrowser.append("您的车【"+ret+"】将停到 9号车位.停车时间:"+time.ctime())
+            self.serSW.send("1".encode())
+            time.sleep(3)
+            self.serCar.send("1".encode())
             pass
+        else:
+            self.serCar.send("2".encode())
+            pass
+        
         pass
 
     def getCar(self):
@@ -152,19 +156,14 @@ class Ui_Form(object):
         cv2.imwrite("tmp.jpg",self.imgFace.frame)
         ret=self.c.sendFile("tmp.jpg",True)
         if ret!="NULL":
-            count+=1
-            if count==1:
-                self.textBrowser.append("您的车【"+ret+"】正在搬运中，请稍等.停车时间"+time.ctime())
-                self.serSW.send("1".encode())
-                time.sleep(1)
-                self.serCar.send()
-                pass
-            elif count==2:
-                self.textBrowser.append("您的车【"+ret+"】将停到18号车位.停车时间"+time.ctime())
-                self.serSW.send("3".encode())
-                time.sleep(1)
-                self.serCar.send()
-                pass
+            self.textBrowser.clear()
+            self.textBrowser.append("您的车【"+ret+"】正在搬运中，请稍等.取车时间："+time.ctime())
+            self.serSW.send("1".encode())
+            time.sleep(3)
+            self.serCar.send("1".encode())
+            pass
+        else:
+            self.serCar.send("2".encode())
             pass
         pass
     pass
